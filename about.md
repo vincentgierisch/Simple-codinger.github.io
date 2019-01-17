@@ -4,11 +4,12 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Just a normal german beerdrinker.
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+Computer engineering student. No I can't fix your broken Windows-Installation.
+And I also don't have time to tell you what Laptop to buy.
 
 ### Contact me
 
