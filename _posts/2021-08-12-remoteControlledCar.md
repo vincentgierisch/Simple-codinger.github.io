@@ -46,6 +46,7 @@ See the following table for detailed information.
 | LOW            | HIGH          | clockwise         |
 | HIGH           | HIGH          | Short circuit     |
 | LOW            | LOW           | Short circuit     |
+{: .table-left }
 
 | In3           | In4           | Motor(right)      |
 | :------------ |:--------------| :-----------------|
@@ -53,6 +54,7 @@ See the following table for detailed information.
 | LOW           | HIGH          | clockwise         |
 | HIGH          | HIGH          | Short circuit     |
 | LOW           | LOW           | Short circuit     |
+{: .table-right }
 
 A clockwise spin makes the wheel turn backwards and and a counter clockwise spin makes the wheel turn forward.
 
@@ -94,6 +96,7 @@ To make it a easier for you, I listed the button codes as well as the axes codes
 | Select        | 8     |
 | Start         | 9     |
 | PS            | 10    |
+{: .table-left }
 
 
 | Axis                | Code          | Value range       |
@@ -104,6 +107,7 @@ To make it a easier for you, I listed the button codes as well as the axes codes
 | Right Y (Joystick)  | 4             | [-1, 1]           |
 | Left (Shoulder)     | 2             | [-1, 0]           |
 | Right (Shoulder)    | 5             | [-1, 0]           |
+{: .table-right }
 
 In the main loop of the code we are waiting for a pygame event. 
 Such an event can be a push of a button or a motion of a axis.
