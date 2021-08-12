@@ -39,28 +39,20 @@ Therefor we have to determine how we can make the motors move.
 With the four "In"-pins of the bridge we can control the spin direction of a motor. The pins In1 and In2 control the spin of the left motor(Out1) and In3, In4 control the spin of the right motor (out2).
 See the following table for detailed information.
 
-<table>
-<tr><th>Left motor </th><th>Right motor</th></tr>
-<tr><td>
 
-| In1           | In2           | Motor(left)       |
-| ------------- |:-------------:| -----------------:|
-| HIGH          | LOW           | counter clockwise |
-| LOW           | HIGH          | clockwise         |
-| HIGH          | HIGH          | Short circuit     |
-| LOW           | LOW           | Short circuit     |
-
-
-</td><td>
+| In1            | In2           | Motor(left)       |
+| :------------- | :------------ | :-----------------|
+| HIGH           | LOW           | counter clockwise |
+| LOW            | HIGH          | clockwise         |
+| HIGH           | HIGH          | Short circuit     |
+| LOW            | LOW           | Short circuit     |
 
 | In3           | In4           | Motor(right)      |
-| ------------- |:-------------:| -----------------:|
+| :------------ |:--------------| :-----------------|
 | HIGH          | LOW           | counter clockwise |
 | LOW           | HIGH          | clockwise         |
 | HIGH          | HIGH          | Short circuit     |
 | LOW           | LOW           | Short circuit     |
-
-</td></tr> </table>
 
 A clockwise spin makes the wheel turn backwards and and a counter clockwise spin makes the wheel turn forward.
 
@@ -80,12 +72,8 @@ To make the development a bit easier we first use the ps3-controller with a cabl
 I will make use of the pygame-library to read the inputs of the gamepad. First of all the button codes for the gamepad had to be figured out with painstaking work.\
 To make it a easier for you, I listed the button codes as well as the axes codes here:
 
-<table>
-<tr><th> Buttons </th><th>Axes</th></tr>
-<tr><td>
-
 | Button        | Code  |
-| ------------- |:-----:|
+| :------------ | :---- |
 | L1            | 4     |
 | L2            | 6     |
 | L3            | 11    |
@@ -107,18 +95,15 @@ To make it a easier for you, I listed the button codes as well as the axes codes
 | Start         | 9     |
 | PS            | 10    |
 
-</td><td>
 
 | Axis                | Code          | Value range       |
-| --------------------|:-------------:| -----------------:|
+| :------------------ | :------------ | :---------------- |
 | Left X (Joystick)   | 0             | [-1, 1]           |
 | Left Y (Joystick)   | 1             | [-1, 1]           |
 | Right X (Joystick)  | 3             | [-1, 1]           |
 | Right Y (Joystick)  | 4             | [-1, 1]           |
 | Left (Shoulder)     | 2             | [-1, 0]           |
 | Right (Shoulder)    | 5             | [-1, 0]           |
-
-</td></tr> </table>
 
 In the main loop of the code we are waiting for a pygame event. 
 Such an event can be a push of a button or a motion of a axis.
@@ -133,40 +118,40 @@ For the bluetooth connection, we will use sixpair.\
 Out of the box the Dualshock3 (or the previous SIXAXIS) does not support the standard Bluetooth pairing procedure. Sixpair searches for PS3-Controllers that are connected via USB and tells them to connect to a new Bluetooth master. For more information, click [here](https://www.pabr.org/sixlinux/sixlinux.en.html).
 
 First of all we have to install the prerequisites:
-````
+```console
 $ sudo apt-get install bluetooth libbluetooth3 libusb-dev
-````
+```
 
 Next step, download and install sixpair. You can use a new directory for that.
-````
+```console
 $ mkdir ~/sixpair
 $ cd ~/sixpair
 $ wget http://www.pabr.org/sixlinux/sixpair.c
 $ gcc -o sixpair sixpair.c -lusb
-````
+```
 
 Now, connect your gamepad to the raspberry pi via a USB cable. Once you have done that, execute sixpair:
-````
+```console
 $ sudo ./sixpair
-````
+```
 
 After that we can connect the gamepad via bluetooth. Please let the cable connected for now, as this is needed for the connection process.
 
-````
+```console
 $ bluetoothctl
 $ agent on
 $ default-agent
 $ scan on
-````
+```
 You should now see your gamepad listed. If not, unplug and plug in your cable again. You should also see the MAC-Address of the gamepad. With this information we can establish a connection. \
 For the next step you should unplug the cable and make sure, that the gamepad is turned on.
 
-````
+```console
 $ scan off
 $ connect <MAC-Address>
 $ trust <MAC-Address>
 $ quit
-````
+```
 
 Now the gamepad should be connected to the raspberry pi via bluetooth. You do not have to go through this process every time. It should be enough to push the PS-Button now to connect to the raspberry.
 
@@ -175,14 +160,14 @@ The code for the project can be found [here](https://github.com/Simple-codinger/
 
 You need python3 to run the code.
 To instal the needed libraries run:
-````
+```console
 $ pip install -r requirements.txt
-````
+```
 
 To start the script, run the following command:
-````
+```console
 $ python3 ./src/start.py
-````
+```
 
 ## Video of the remote-controlled car
 
