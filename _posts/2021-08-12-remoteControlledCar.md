@@ -63,7 +63,7 @@ The higher the duty cycle of the signal the higher the speed of the motor. A dut
 
 So now that we know how to move the motors, we should think about how to steer the vehicle. We do not have a steering wheel for this, do we? 
 The only thing we could do to solve this problem is to steer the vehicle like a tank. \
-So turn left, the right motor have to move faster than  the left one. For a right turn vice versa.
+So to turn left, the right motor have to move faster than  the left one. For a right turn vice versa.
 
 The code for the motor module can be found [here](https://github.com/Simple-codinger/remoteControlledCar/blob/main/src/motor.py).
 
