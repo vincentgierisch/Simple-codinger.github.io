@@ -25,7 +25,7 @@ A better way is to search for a function, that takes a finite set of waypoints a
 A cubic function can do the trick. Such a function $\textit{f}$ can be described by $ax^3+bx^2+cx+d$, where $a, b, c, d$ are parameters that have to be found by an algorithm. New datapoints (or waypoints) can be interpolated by $y = f(x)$.
 Like I said before, there are four parameters that have to be found, therefore we need at least four linear equations to find these parameters. 
 
-To get these linear equations we have to look at the way the given datapoints interact with the cubic function. The set of datapoints $\textit{x_i, y_i} can be described with the function f so that $x_i = f(y_i),\;i \in\{0, 1, ..., n-1\}$.
+To get these linear equations we have to look at the way the given datapoints interact with the cubic function. The set of datapoints $\textit{x_i, y_i} can be described with the function f so that $x_i = f(y_i),\;i \in\{1, 2, ..., n\}$.
 So to get four of these equations we need at least four datapoints.
 
 We can write that in an matrix equation.
@@ -77,9 +77,79 @@ So for $n$ datapoints we need $n-1$ functions.
 
 But if we just use the methods from the previous chapter we would end with two equations for each function. That is not enough to get our four coefficients. So we need two more equations for that.
 
+To make sure that the transition between two functions is smooth, the fist and the second derivative on each function pair should be equal.
 
+$f'_i(x_{i+1}) = f'_{i+1}(x_{i+1})$
 
+$f''_i(x_{i+1}) = f''_{i+1}(x_{i+1})$ 
 
+Note that the equations above can be written as:
+
+$f'_i(x_{i+1}) - f'_{i+1}(x_{i+1}) = 0$
+
+$f''_i(x_{i+1}) - f''_{i+1}(x_{i+1}) = 0$ 
+
+<!-- Picture -->
+
+So besides of the first and the last, every function has four equations.
+
+We also want to make sure that our spline begins and fades out smoothly. For that, we have to ensure that the second derivative in the first and last datapoint is zero.
+
+$f''_1(x_1) = 0$
+
+$f''_{n-1}(x_n) = 0$
+
+As we see, we now have four equations for every function in the spline. So we can now determine our four coefficients for each function with the help of the linear equation system.
+
+I tried my best to write that down in a matrix equation.
+
+$$
+\begin{bmatrix}
+ &x_1^3  &x_1^2  &x_1 &1 &0 &0 &0 &0 &\cdots &0 &0 &0 &0\\
+ &0 &0 &0 &0 &x_2^3  &x_2^2  &x_2 &1 &\cdots &0 &0 &0 &0\\
+ & & & & & & &\vdots & & & & & &\\
+ &0 &0 &0 &0 &0 &0 &0 &0 &\cdots &x^3  &x^2  &x &1\\
+ &0 &0 &0 &0 &3x_2^2 &2x_2 &1 &0 &\cdots &0 &0 &0 &0\\
+ &0 &0 &0 &0 &6x_2 &2 &0 &0 &\cdots &0 &0 &0 &0\\
+ & & & & & & &\vdots & & & & & &\\
+ &6x_1 &2 &0 &0 &0 &0 &0 &0 &\cdots &0 &0 &0 &0\\
+ &0 &0 &0 &0 &0 &0 &0 &0 &\cdots &6x_n &2 &0 &0
+\end{bmatrix}
+
+\begin{bmatrix}
+ a_1\\
+ b_1\\
+ c_1\\
+ d_1\\
+ a_2\\
+ b_2\\
+ c_2\\
+ d_2\\
+ a_3\\
+ b_3\\
+ c_3\\
+ d_3\\
+ \vdots\\
+ a_{n-2}\\
+ b_{n-2}\\
+ c_{n-2}\\
+ d_{n-2}\\
+ a_{n-1}\\
+ b_{n-1}\\
+ c_{n-1}\\
+ d_{n-1}\\
+\end{bmatrix} 
+=
+\begin{bmatrix}
+ y_1\\
+ y_2\\
+ \vdots\\
+ y_n\\
+ 0\\
+ \vdots\\
+ 0
+\end{bmatrix} 
+$$
 
 ### Man I love LaTeX in Markdown-Files ;)
 
