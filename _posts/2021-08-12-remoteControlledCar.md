@@ -1,6 +1,7 @@
 ---
 layout: post
 title: How to build a remote-controlled car
+excerpt_separator: <!--more-->
 ---
 
 Hey everyone,
@@ -8,7 +9,7 @@ Hey everyone,
 about three weeks ago I ordered this [4-wheel robot car kit](https://www.amazon.de/gp/product/B07JK33HVL/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&th=1) from Amazon.
 
 The first goal I have set for myself is to be able to control the car with a PS3 controller.
-
+<!--more-->
 To control the motors a [L298N H-Bridge](https://www.amazon.de/gp/product/B07DK6Q8F9/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1) is used.
 
 An H-Bridge can switch the polarity of the voltage that is applied to a load. In our case it will provide the voltage for the motors and allows the motors to run forwards as well as backwards.

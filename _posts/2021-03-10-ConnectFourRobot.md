@@ -1,11 +1,13 @@
 ---
 layout: post
 title: Build a robot that can play ConnectFour
+excerpt_separator: <!--more-->
 ---
 
 Hello you,  
 
 in the last couple of months some fellow students and I build a [robot that can play ConnectFour](https://youtu.be/cAOFIIrNGic).
+<!--more-->
 
 Of course the software is available on [GitHub](https://github.com/ConnectFourRobot).
 
