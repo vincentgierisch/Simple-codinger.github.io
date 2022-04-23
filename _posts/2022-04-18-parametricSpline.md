@@ -73,21 +73,23 @@ This problem can be solved by using a cubic spline.
 ## Spline interpolation
 A spline is a piecewise polynomial function. So for each datapoint pair (e.g. $\{(x_0, y_0), (x_1, y_1)\},\:\{(x_1, y_1), (x_2, y_2)\},\:\dots,\{(x_{n-1}, y_{n-1}), (x_n, y_n)\}$)
 there is a function which connects these pairs.
-So for $n$ datapoints we need $n-1$ functions.
+So for $n$ datapoints we need $n-1$ functions, like you can see in the graph below. Note that the datapoints in the graph are the same as the datapoints in the problematic graph above. You can already see, that the spline interpolation gets rid of the oscillation problem.
+
+![Spline interpolation](/images/spline/splineInterpolation.png)
 
 But if we just use the methods from the previous chapter we would end with two equations for each function. That is not enough to get our four coefficients. So we need two more equations for that.
 
 To make sure that the transition between two functions is smooth, the fist and the second derivative on each function pair should be equal.
 
-$f'_i(x_{i+1}) = f'_{i+1}(x_{i+1})$
+$$f'_i(x_{i+1}) = f'_{i+1}(x_{i+1})$$
 
-$f''_i(x_{i+1}) = f''_{i+1}(x_{i+1})$ 
+$$f''_i(x_{i+1}) = f''_{i+1}(x_{i+1})$$ 
 
 Note that the equations above can be written as:
 
-$f'_i(x_{i+1}) - f'_{i+1}(x_{i+1}) = 0$
+$$f'_i(x_{i+1}) - f'_{i+1}(x_{i+1}) = 0$$
 
-$f''_i(x_{i+1}) - f''_{i+1}(x_{i+1}) = 0$ 
+$$f''_i(x_{i+1}) - f''_{i+1}(x_{i+1}) = 0$$
 
 <!-- Picture -->
 
@@ -95,9 +97,9 @@ So besides of the first and the last, every function has four equations.
 
 We also want to make sure that our spline begins and fades out smoothly. For that, we have to ensure that the second derivative in the first and last datapoint is zero.
 
-$f''_1(x_1) = 0$
+$$f''_1(x_1) = 0$$
 
-$f''_{n-1}(x_n) = 0$
+$$f''_{n-1}(x_n) = 0$$
 
 As we see, we now have four equations for every function in the spline. So we can now determine our four coefficients for each function with the help of the linear equation system.
 
@@ -172,18 +174,68 @@ $$
 \end{bmatrix} 
 $$
 
-### Man I love LaTeX in Markdown-Files ;)
+Like the previous linear equation system, there are way better methods for getting the coefficients for the spline. This is just good for understanding the whole spline thing. I think you get a good idea how the size of the matrices will grow.
+
+But if you want to implement it, the matrix stuff will work as good as any other (better) algorithm.
+
+There is still a problem with the "normal" spline interpolation.
+What if we don't want a path that is continuos in the x-direction. Lets assume we want the path to be a S shape. We can not do that with an ordinary function because we would have multiple y values for one x value. I hope you get the idea with the help of the graph below.
+
+![Spline interpolation in a 2d plane](/images/spline/splineInterpolationProblem.png)
+
+We need another approach to archive such a graph.
+
+## Parametrized cubic spline
+
+The most common solution to that problem is to parametrize the spline by its length.
+Take a look at this animation to understand what exactly the length of the spline is.
+
+![Animation of a arc length](https://upload.wikimedia.org/wikipedia/commons/d/dc/Arc_length.gif)
+
+The goal is to find a function $(x, y) = f(s)$, where s is the length. That means in the end we have a function $f$ that gives us points on the spline when provided a certain length $s$.
+
+To do that, we first have to determine the length of the spline at each given datapoint. This can be done in very different and complicated ways. In general the formula for the length of a spline (represented by $f(x)$) between the points a and b is:
+
+$$\int_{a}^{b}\sqrt{1+[f′(x)]^2}\,dx$$
+
+We can approximate that with the help of the Riemann sum:
+
+$$\lim_{n \rightarrow \infty}\sum_{i=1}^n\sqrt{1+[f′(x^∗_i)]^2}Δx$$
+
+Now we have some rewriting to do:
+
+$$\sqrt{1+[f′(x^∗_i)]^2}Δx = Δx\sqrt{1+((Δy_i)/(Δx))^2} = \sqrt{(Δx)^2+(Δy_i)^2}$$
+
+Next problem that occurs is, that we don't have the function for which we would like to determine the length yet.
+Because for that, we would need the length, but for the length we need the function, but for the function we need the length...see where we are going?
+
+Luckily for us, we just need the length of the spline at the given datapoints. 
+So with that in mind, we can use the line segments, that are made by the datapoints (see graph beneath).
+
+![Line segments by datapoints](/images/spline/splineLineSegments.png)
+
+To calculate the length of the segments at each datapoint, we can use the formula that is described above.
+$$s_i = \sum_{k=1}^i\sqrt{(x_{k+1}-x_{k})^2 + (y_{k+1}-y_{k})^2}$$
+
+We now have an approximate length of the spline at each provided datapoint.
+
+In the next step, we have to split the spline in two spline representations.
+$$
+\begin{aligned}
+S_1: [s_i, x_i] &\to \mathbb{R}\\
+S_2: [s_i, y_i] &\to \mathbb{R}
+\end{aligned}
+$$
+So in the end, we have two splines ($S_1,\:S_2$) that give us the x- and the y-coordinates for our parametrized spline.
+Since $s_i$ is strictly increasing, we will not get any problems which the spline cannot represent.
+Checkout the graphs below to see the two splines that make up the S-shape spline (that I showed you above).
+![Spline representation of x-coordinate and spline length](/images/spline/splineParamX.png)
+![Spline representation of y-coordinate and spline length](/images/spline/splineParamY.png)
+
+The source code is, as always, on GitHub. [Check it out!](https://github.com/Simple-codinger/SplineParametrization)
+
+## TL;DR
+Spline parametrization is cool. Use it. Get the code on [GitHub](https://github.com/Simple-codinger/SplineParametrization).
 
 
-<!-- For what is it used -->
-
-<!-- polynomial interpolation -->
-<!-- vandermoonde matrix -->
-<!-- Oscillation -->
-
-<!-- Spline Interpolation -->
-<!-- Problems in 2d plane -->
-
-<!-- Parametrized cubic spline -->
-<!-- Calculate length -->
-<!-- Integral (Riemann) -->
+### **Man I love LaTeX in Markdown-Files ;)**
