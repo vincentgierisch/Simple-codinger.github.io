@@ -74,7 +74,7 @@ Imagine a robot tries to follow a path represented by these datapoints. You woul
 This problem can be solved by using a cubic spline.
 
 ## Spline interpolation
-A spline is a piecewise polynomial function. So for each datapoint pair (e.g. $\{(x_0, y_0), (x_1, y_1)\},\:\{(x_1, y_1), (x_2, y_2)\},\:\dots,\{(x_{n-1}, y_{n-1}), (x_n, y_n)\}$)
+A spline is a piecewise polynomial function. So for each datapoint pair (e.g. $\\{(x_0, y_0), (x_1, y_1)\\},\\{(x_1, y_1), (x_2, y_2)\\},\dots,\\{(x_{n-1}, y_{n-1}), (x_n, y_n)\\}$)
 there is a function which connects these pairs.
 So for $n$ datapoints we need $n-1$ functions, like you can see in the graph below. Note that the datapoints in the graph are the same as the datapoints in the problematic graph above. You can already see, that the spline interpolation gets rid of the oscillation problem.
 
@@ -218,6 +218,7 @@ So with that in mind, we can use the line segments, that are made by the datapoi
 ![Line segments by datapoints](/images/spline/splineLineSegments.png)
 
 To calculate the length of the segments at each datapoint, we can use the formula that is described above.
+
 $$s_i = \sum_{k=1}^i\sqrt{(x_{k+1}-x_{k})^2 + (y_{k+1}-y_{k})^2}$$
 
 We now have an approximate length of the spline at each provided datapoint.
@@ -230,7 +231,7 @@ S_2: [s_i, y_i] &\to \mathbb{R}
 \end{aligned}
 $$
 To put it in other words, we will generate two splines, one with datapoints ($s_i$, $x_i$) and the other with the datapoints ($s_i$, $y_i$). \
-So in the end, we have two splines ($S_1,\:S_2$) that give us the x- and the y-coordinates for our parametrized spline.
+So in the end, we have two splines ($S_1$, $S_2$) that give us the x- and the y-coordinates for our parametrized spline.
 Since $s_i$ is strictly increasing, we will not get any problems which the spline cannot represent.
 Checkout the graphs below to see the two splines that make up the S-shape spline (that I showed you above).
 
