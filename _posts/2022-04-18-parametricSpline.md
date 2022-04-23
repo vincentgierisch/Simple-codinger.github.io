@@ -22,10 +22,10 @@ A better way is to search for a function, that takes a finite set of waypoints a
 
 ## Polynomial Interpolation
 
-A cubic function can do the trick. Such a function $\textit{f}$ can be described by $ax^3+bx^2+cx+d$, where $a, b, c, d$ are parameters that have to be found by an algorithm. New datapoints (or waypoints) can be interpolated by $y = f(x)$.
+A cubic function can do the trick. Such a function $f$ can be described by $ax^3+bx^2+cx+d$, where $a, b, c, d$ are parameters that have to be found by an algorithm. New datapoints (or waypoints) can be interpolated by $y = f(x)$.
 Like I said before, there are four parameters that have to be found, therefore we need at least four linear equations to find these parameters. 
 
-To get these linear equations we have to look at the way the given datapoints interact with the cubic function. The set of datapoints $\textit{x_i, y_i} can be described with the function f so that $x_i = f(y_i),\;i \in\{1, 2, ..., n\}$.
+To get these linear equations we have to look at the way the given datapoints interact with the cubic function. The set of datapoints $x_i, y_i$ can be described with the function f so that $x_i = f(y_i),\;i \in\{1, 2, ..., n\}$.
 So to get four of these equations we need at least four datapoints.
 
 We can write that in an matrix equation.
@@ -64,9 +64,12 @@ Now we can get a bunch of waypoints/datapoints by generating x coordinates and p
 
 ![Polynomial interpolation function](/images/spline/interpolationPolynom.png)
 
-However there are some major problems with this method. The function starts to oscillate when more than four datapoints are provided.
+However there are some major problems with this method. The function starts to oscillate when more than four datapoints are provided. 
+
 ![Problems with more than four datapoints](/images/spline/interpolationPolynomProblem.png)
-Take a look at how the function oscillates at the end of each side.
+
+Take a look at how the function oscillates at the end of each side.\
+Imagine a robot tries to follow a path represented by these datapoints. You would expect the robot to move in a almost straight line (except a little curve in the middle). The problem is that the robot would destroy almost everything in its environment, especially in the beginning and in the end of its mission.
 
 This problem can be solved by using a cubic spline.
 
@@ -226,9 +229,11 @@ S_1: [s_i, x_i] &\to \mathbb{R}\\
 S_2: [s_i, y_i] &\to \mathbb{R}
 \end{aligned}
 $$
+To put it in other words, we will generate two splines, one with datapoints ($s_i$, $x_i$) and the other with the datapoints ($s_i$, $y_i$). \
 So in the end, we have two splines ($S_1,\:S_2$) that give us the x- and the y-coordinates for our parametrized spline.
 Since $s_i$ is strictly increasing, we will not get any problems which the spline cannot represent.
 Checkout the graphs below to see the two splines that make up the S-shape spline (that I showed you above).
+
 ![Spline representation of x-coordinate and spline length](/images/spline/splineParamX.png)
 ![Spline representation of y-coordinate and spline length](/images/spline/splineParamY.png)
 
