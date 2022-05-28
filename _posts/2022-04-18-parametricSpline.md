@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to generate a parametric cubic spline.
+title: How to generate a parametric cubic spline
 excerpt_separator: <!--more-->
 ---
 
