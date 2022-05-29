@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Serie: Die Schönheit der Algorithmen und Datenstrukturen
+title: ! 'Serie: Die Schönheit der Algorithmen und Datenstrukturen'
 excerpt_separator: <!--more-->
 ---
 
