@@ -35,6 +35,85 @@ Jetzt haben wir also nur noch das Spielbrett mitsamt den Steinen darin. Diese In
 Ein Beispiel: der erste Zustand ist $$S_0$$, das leere Brett, kein Stein wurde bis jetzt hineingeworfen. Wenn der erste Spieler einen Stein hineinwirft, ändert sich der Zustand des Spiels von $$S_0$$ zu $$S_1$$.\
 Wie viele Zustände kann es in einem Spiel maximal geben? Es können ja maximal soviele Züge getätigt werden, wie das Spielbrett Felder hat. Also 7x6. Zustand $$S_{42}$$ ist somit aufjeden Fall ein letzter Zustand, oder auch *Endzustand* genannt.\
 Die nächste Frage ist, wie können wir unsere Zustände schön darstellen.
-Da wir Informatiker auch einen leichten Hang zur Mathematik haben, möchte ich das Spielbrett jetzt erstmal in die Zahlenwelt holen.
+Da wir Informatiker auch einen leichten Hang zur Mathematik haben, möchte ich das Spielbrett jetzt erstmal in die Zahlenwelt holen. Da das Spielbett ja bereits wie eine Matrix aussieht, werden wir auch eine solche zur Darstellung verwenden. Wir werden mit der Matrix nicht rechnen, aber es macht die Darstellungen der Spielzustände leichter.\
+Die leeren Felder werden durch die 0 repräsentiert. Die Spielsteine des Computers werden mit einer 1 und die Steine des Gegners werden mit einer 2 dargestellt. Wenn wir die Spielsituation im obigen Bild in der Matrixschreibweise darstellen, sieht das so aus:
+
+$$
+\begin{bmatrix}
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0  &0  &0  &2  &0  &0  &0 \\  
+ 1  &1  &2  &1  &2  &1  &1 \\
+ 2  &2  &1  &1  &1  &2  &1 \\
+ 2  &1  &1  &2  &2  &1  &2 \\
+ 2  &2  &2  &1  &1  &1  &2 
+\end{bmatrix}
+$$
+
+In diesem Beispiel wird davon ausgegangen, dass der Computer die Farbe rot zugewiesen bekommt und der Gegner die gelben Spielsteine.
+
+Jetzt haben wir also die Informationen, die zur Darstellung einer bestimmten Spielsituation benötigt werden. Aber was soll der Computer damit anfangen?\
+Er soll anhand einer Spielsituation (oder Spielzustand) eine Aktion auswählen, die für ihn von Vorteil ist.\
+Kurzgesagt, der Computer soll eine Spalte auswählen, in die er seinen Stein werfen kann. 
+
+Da wir gerade von Aktionen gesprochen haben, definiere ich diese kurz. Eine Aktion $$a_i$$ ist eine Aktion die auf den Zustand $$S_i$$ angewandt wird. 
+Eine Aktion ist in unserem Fall das Einwerfen eines Spielsteines in eine der sieben Öffnungen. Wenn wir also als ersten Wurf (also in Spielzustand $$S_0$$) unseren Spielstein in die mittlere Öffnung werfen,
+dann ist $$a_0 = 4$$.
+
+Wie hängt ein Spielzustand und eine Aktion nun zusammen? Eine Aktion überführt einen Spielzustand immer in den nächsten Spielzustand.
+
+$$
+S_{i+1} = f(S_i, a_i);
+$$
+
+Wir haben also eine Funktion $$f$$, die uns $$S_{i+1}$$ anhand von $$S_i$$ und $$a_i$$ ausrechnet.
+Wie die Funktion genau funktioniert ist nicht relevant, aber ich denke, dass jeder der schonmal 4-Gewinnt gespielt hat sich vorstellen kann, wie eine bestimmte Spielsituation nach dem Einwerfen
+von einem Spielstein in eine beliebige Spalte aussieht. Also nochmal als Zusammenfassung:
+
+$$
+\begin{bmatrix}
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &0  &0  &0  &0 \\
+\end{bmatrix}
+\xrightarrow{a_0 = 4}
+\begin{bmatrix}
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &0  &0  &0  &0 \\
+ 0	&0  &0  &1  &0  &0  &0 \\
+\end{bmatrix}
+$$
+
+## Wie wählt der Computer einen guten Zug aus?
+Was unser Computer jetzt braucht, ist eine Funktion $$g$$ die Anhand eines Spielzustandes $$S_i$$ eine Aktion $$a_i$$ berechnet. Dabei soll die Aktion $$a_i$$ dem Computer langfristig einen Vorteil bringen.
+<nobr>Also nochmal sauber aufgeschrieben: $a_i = g(S_i)$</nobr>
+
+Um zu beurteilen, welche Aktion dem Computer langfristig den größten Vorteil bringt, ahmt der Computer bei den meisten Strategien die menschliche Denkweise nach.
+Deswegen können wir hier tatsächlich von einer Künstlichen Intelligenz sprechen.
+Bevor wir uns die verschiedenen Strategien ansehen, wie der Computer die Funktion $$g$$ umsetzt, möchte ich noch auf die sogenannte Heuristik Funktion eingehen.
+
+### Heuristik Funktion
+Die Heuristik Funktion bildet bei den meisten Strategien das Herzstück. Dabei nimmt die Funktion einen Spielzustand und bildet diesen auf ein Skalar ab. 
+Kurzgesagt es bepunktet einen beliebigen Spielzustand, also wie gut oder schlecht dieser Spielzustand für den Computer ist. 
+Ist ein Spielzustand besonders gut, weil wir vier Steine in einer Reihe haben, gibt es z.B. 100 Punkte. 
+Ist der Spielzustand nichts sagend, z.B. weil noch kein Spieler einen Wurf getätigt hat, gibt es z.B. 0 Punkte.\
+Allgemein gesprochen haben wir hier also eine Funktion $h$ die einen Spielzustand $S_i$ nimmt und uns eine Anzahl von Punkten $p$ zurückgibt:
+$$h(S_i) = p$$
+
+Wie die Heuristik Funktion genau aufgebaut ist, ist von Spiel zu Spiel unterschiedlich. Oft gibt es für beliebte Brett-Spiele, wie z.B. Schach, 
+bereits vorgefertigte Heuristiken, die nur noch verwenden muss.\
+In unserem Vier-Gewinnt Spiel würde z.B. eine Heuristik Sinn machen, die einer 4er Linie von unseren Steinen 100, einer 3er Linie 50 und einer 2er 10 Punkte gibt.
+Meist steht und fällt eine gute Strategie mit der Heuristik-Funktion. Es macht also Sinn diese im laufe der Zeit nochmal zu überdenken bzw. daran etwas rumzuschrauben.
+
+### Naive Strategie
+Bei der ersten Strategie handelt es sich um einen sehr naiven Ansatz. Dabei betrachten wir den aktuellen Spielzustand $S_i$ und simulieren jede mögliche Aktion auf diesem Zustand.
+Wir erhalten also maximal 7 neue unterschiedliche Spielzustände $S_{i+1}$. Ich habe mal versucht das in diesem Bild zu verdeutlichen:
+
+<!-- ToDo: Bild einfügen -->
 
 **Danke fürs lesen, bleibt neugierig**
