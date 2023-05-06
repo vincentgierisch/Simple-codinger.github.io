@@ -121,9 +121,38 @@ Nun wird für jeden simulierten Zustand die Heuristik-Funktion aufgerufen. Danac
 Die Aktion die zu diesem Zustand geführt hat, wird als Aktion für den den nächsten Zug gewählt.\
 In diesem Beispiel wird vermutlich der mittlere Zustand mit den meisten Punkten bewertet. Die Aktion die deswegen für den Computer ausgewählt wird ist $a_4=4$.
 
-Warum ist diese Strategie nicht besonders gut? Sie ist nur auf einen kurzfristigen Vorteil aus. Genauger gesagt auf den Vorteil im nächsten Zug. 
+Warum ist diese Strategie nicht besonders gut? Sie ist nur auf einen kurzfristigen Vorteil aus. Genauer gesagt auf den Vorteil im nächsten Zug. 
 Das mag zwar in den meisten Fällen funktionieren, aber oft ist es besser sich etwas aufzubauen um dann zuzuschlagen. Wir müssen also länger in die Zukunft schauen.
 
 ### Minmax Strategie
+Bei der Minmax Strategie wird der Minmax Algorithmus angewandt. Der Minmax-Algorithmus berechnet die Spielzustand ausgehend von dem jetzigen Zustand bis zu einem bestimmten Zeitpunkt.
+Wie das genau aussieht werden wir uns später noch ansehen. Er ist sogesehen eine Erweiterung der naiven Strategie. Er sieht sich jedoch dabei nicht nur den nächsten Schritt an, sondern 
+sieht z.B. sechs Schritte in die Zukunft. Auch berücksichtigt er dabei alle möglichen Züge des Gegners. Wie das genau aussieht wird im nachfolgenden Bild verdeutlicht.
+Die Zustände werden jedoch nicht mehr durch einzelne Matrizen repräsentiert, sondern durch Kreise.
+
+<!-- ToDo: Bild einfügen -->
+![NaiveSimulation](/images/boardGame/naiveSimulation.png){:width="900" style="display:block; margin-left:auto; margin-right:auto"}
+
+Im nächsten Schritt rufen wir wieder unsere Heuristik Funktion auf. Jedoch nur für die Spielzustände auf der letzten Ebene. Im übrigen werden die Inhalte der letzten Ebene Blätter genannt. 
+Mehr dazu gibt es in einem meiner [letzten Artikel](../Sort). Nun wählen wir wieder den Spielzustand aus, der die meisten Punkte bekommt.\
+Dieser Spielzustand haben wir ja erreicht, in dem wir eine Kette von Aktionen ausgeführt haben. Aus dieser Kette wählen wir nun die erste Aktion aus, als $a_i$, als tatsächliche Aktion die 
+nun im Spiel ausgeführt werden soll.
+
+Wie viele Zustände müssen hier simuliert werden? In der ersten Ebene haben wir unseren Startzustand, das ist der tatsächliche Zustand des Spieles. 
+Danach simulieren wir durch das gedankliche Einwerfen eines Spielsteines in jede Öffnung sieben weitere Spielzustände. 
+Für jeden dieser sieben Zustände werden wieder jeweils 7 weitere Zustände generiert, usw.
+Wir simulieren also $(7+7\*7+7\*7\*7+...)$ Zustände. Etwas eleganter aufgeschrieben: $$\sum_{i=1}^{n} 7^i$$
+
+In einem Spiel können ja maximal $7\*6=42$ Züge aufkommen. Warum simulieren wir also nicht 42 Schritte voraus? So könnten wir ja immer bis zum Ende sehen, um so den wirklich aller besten Zug 
+berechnen zu können.\
+Die Problematik ist, dass wir $\sum_{i=1}^{42} 7^i$ Zustände simulieren müssten. Das sind laut Wolframalpha 364 Quintilliarden. 
+Wenn wir bedenken, dass ein moderner Rechner ca. 16 Milliarde Byte an Speicher besitzt, haben wir also schon ein großes Speicherproblem. 
+Geschweige denn, dass wir Jahre brauchen würden, um all diese Zustände zu simulieren. Es macht also Sinn eine geringere Simulationsgröße sie z.B. 6 festzulegen.
+
+Der Minmax-Algorithmus kann noch durch z.B. Alpha-Beta Pruning beschleunigt werden, jedoch will ich darauf nicht eingehen, da die Funktionalität die selbe ist.
+
+Der große Nachteil der Minmax-Strategie ist, dass wir nur ein paar Zeitschritte in die Zukunft dadurch schauen können. Wie können wir das also verbessern?
+
+### Monte Carlo Tree Search
 
 **Danke fürs lesen, bleibt neugierig**
