@@ -115,6 +115,15 @@ Meist steht und fällt eine gute Strategie mit der Heuristik-Funktion. Es macht 
 Bei der ersten Strategie handelt es sich um einen sehr naiven Ansatz. Dabei betrachten wir den aktuellen Spielzustand $S_i$ und simulieren jede mögliche Aktion auf diesem Zustand.
 Wir erhalten also maximal 7 neue unterschiedliche Spielzustände $S_{i+1}$. Ich habe mal versucht das in diesem Bild zu verdeutlichen:
 
-<!-- ToDo: Bild einfügen -->
+![NaiveSimulation](/images/boardGame/naiveSimulation.png){:width="900" style="display:block; margin-left:auto; margin-right:auto"}
+
+Nun wird für jeden simulierten Zustand die Heuristik-Funktion aufgerufen. Danach können wir den Zustand auswählen, der am meisten Punkte bekommen hat.
+Die Aktion die zu diesem Zustand geführt hat, wird als Aktion für den den nächsten Zug gewählt.\
+In diesem Beispiel wird vermutlich der mittlere Zustand mit den meisten Punkten bewertet. Die Aktion die deswegen für den Computer ausgewählt wird ist $a_4=4$.
+
+Warum ist diese Strategie nicht besonders gut? Sie ist nur auf einen kurzfristigen Vorteil aus. Genauger gesagt auf den Vorteil im nächsten Zug. 
+Das mag zwar in den meisten Fällen funktionieren, aber oft ist es besser sich etwas aufzubauen um dann zuzuschlagen. Wir müssen also länger in die Zukunft schauen.
+
+### Minmax Strategie
 
 **Danke fürs lesen, bleibt neugierig**
