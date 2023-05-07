@@ -154,5 +154,7 @@ Der Minmax-Algorithmus kann noch durch z.B. Alpha-Beta Pruning beschleunigt werd
 Der große Nachteil der Minmax-Strategie ist, dass wir nur ein paar Zeitschritte in die Zukunft dadurch schauen können. Wie können wir das also verbessern?
 
 ### Monte Carlo Tree Search
+Monte Carlo ist nicht nur für seine Rennstrecke sondern auch für seine Casinos und somit auch Glücksspiele bekannt.
+Auch in Monte Carlo Algorithmen geht es um Glück. Genauer gesagt um Zufallszahlen.
 
 **Danke fürs lesen, bleibt neugierig**
