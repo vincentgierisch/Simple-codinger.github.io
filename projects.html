@@ -1,0 +1,23 @@
+---
+layout: default
+---
+<div class="posts">
+  {% for post in site.categories.projects %}
+    <article class="post">
+
+
+      <div class="entry projectPreview">
+      	<h2>{{ post.title }}</h2>
+		<div class="container">
+			<div class="text">
+      			<p>{{ post.content }}</p>
+			</div>
+			<div class="image">
+				<img src="{{post.previewImage}}" />
+			</div>
+		</div>	
+      </div>
+      <a href="{{post.projectLink}}" class="read-more">Project link</a>
+    </article>
+  {% endfor %}
+</div>
