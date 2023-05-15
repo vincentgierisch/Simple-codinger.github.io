@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Warum dich Computer der in Brettspielen (fast) immer schlagen wird
+title: Warum dich der Computer in Brettspielen (fast) immer schlagen wird
 excerpt_separator: <!--more-->
 ---
 In diesem Artikel werde ich versuchen euch ein paar Taktiken zu erklären, die ein Computer anwendet um euch in einem Brettspiel zu besiegen.\
@@ -134,7 +134,11 @@ Aus Platzgründen werden in jedem Schritt nur zwei Zustände simuliert. In Wirkl
 ![NaiveSimulation](/images/boardGame/minmax.gif){:width="900" style="display:block; margin-left:auto; margin-right:auto"}
 
 Im nächsten Schritt rufen wir wieder unsere Heuristik Funktion auf. Jedoch nur für die Spielzustände auf der letzten Ebene. Im übrigen werden die Inhalte der letzten Ebene Blätter genannt. 
-Mehr dazu gibt es in einem meiner [letzten Artikel](../Sort). Nun wählen wir wieder den Spielzustand aus, der die meisten Punkte bekommt.\
+Mehr dazu gibt es in einem meiner [letzten Artikel](../Sort). 
+Nun werden die Ebenen von Unten nach Oben durchgegangen. Die Ebenen, die die Züge des Gegners darstellen, wählen die **min**imalen Punkten aus der Ebene darunter aus. 
+Die Ebenen, die die Züge des Computers darstellen, wählen die **max**imalen Punkte aus der Ebene darunter aus.\ Dieses Verfahren stellt sicher, dass der Computer seine eigenen Punkte maximiert
+und betrachtet auch den Fall, dass der Gegner versuchen wird, die Punkte des Computers zu minimieren.\
+Nun wählen wir wieder den Spielzustand aus, der die meisten Punkte bekommt.\
 Dieser Spielzustand haben wir ja erreicht, in dem wir eine Kette von Aktionen ausgeführt haben. Aus dieser Kette wählen wir nun die erste Aktion aus, als $a_i$, als tatsächliche Aktion die 
 nun im Spiel ausgeführt werden soll.
 
