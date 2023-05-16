@@ -5,7 +5,7 @@ excerpt_separator: <!--more-->
 ---
 In diesem Artikel werde ich versuchen euch ein paar Taktiken zu erklären, die ein Computer anwendet um euch in einem Brettspiel zu besiegen.\
 Es war eher ein ruhiger Abend in der WG, als eine Freundin (fast schon aus dem nichts) ein 4-Gewinnt-Spiel aus ihrer Handtasche zog.\
-Als wir ein paar Runden gespielt haben wurde mir eines klar: Ich war richtig schlecht darin. Und damit meine ich nicht, dass ich ein paar Spiele verloren habe, nein, ich habe soweit ich weis kein einziges gewonnen.
+Als wir ein paar Runden gespielt haben wurde mir eines klar: Ich war richtig schlecht darin. Und damit meine ich nicht, dass ich ein paar Spiele verloren habe, nein, ich habe, soweit ich noch weiß, kein einziges gewonnen.
 <!--more-->
 Nach dieser Niederlage gab es logischerweise nur eine handvoll von Optionen: Aus der WG ausziehen und irgendwo ein neues Leben anfangen, ein paar Stunden hinsetzen und eine Taktik für 4-Gewinnt aneignen, oder ein paar Wochen/Monate hinsetzten und einen Algorithmus entwickeln, der jeden Profi in 4-Gewinnt schlägt.\
 Klar, dass man sich als Informatiker für die letzte Variante entscheidet. Wobei die erste Variante auch sehr verlockend war.
@@ -21,7 +21,7 @@ Kurz zur Wiederholung: Wie spielt man 4-Gewinnt?
 Hier abgebildet ist ein handelsübliches 4-Gewinnt-Spiel. Ein blaues Brett und gelbe bzw. rote Spielsteine. Das Brett ist 6 Felder hoch und 7 breit.
 Das Brett hat oben Öffnungen, sodass Spielsteine hineingeworfen werden können.
 Das Spiel wird mit zwei Spieler gespielt. Ein Spieler bekommt die roten, der andere die gelben Spielsteine.\
-Im Spielverlauf werfen die Spieler abwechselnd ihre Steine in das Brett. Gewonnen hat der Spieler, der als Erstes 4 seiner eigenen Spielsteine in eine Linie bringt. 
+Im Spielverlauf werfen die Spieler abwechselnd ihre Steine in das Brett. Gewonnen hat der Spieler, der als Erstes vier seiner eigenen Spielsteine in eine Linie bringt. 
 Die Linie darf dabei nicht von anderen Steinen unterbrochen sein. Es ist jedoch egal, ob die Linie horizontal, vertikal oder schräg verläuft.\
 Es kann jedoch auch passieren, dass kein Spieler gewinnt und das Brett bereits voll mit Spielsteinen besetzt ist. Ein klassisches Unentschieden also.
 
@@ -107,9 +107,9 @@ Allgemein gesprochen haben wir hier also eine Funktion $h$ die einen Spielzustan
 $$h(S_i) = p$$
 
 Wie die Heuristik Funktion genau aufgebaut ist, ist von Spiel zu Spiel unterschiedlich. Oft gibt es für beliebte Brett-Spiele, wie z.B. Schach, 
-bereits vorgefertigte Heuristiken, die nur noch verwenden muss.\
+bereits vorgefertigte Heuristiken, die man nur noch verwenden muss.\
 In unserem Vier-Gewinnt Spiel würde z.B. eine Heuristik Sinn machen, die einer 4er Linie von unseren Steinen 100, einer 3er Linie 50 und einer 2er 10 Punkte gibt.
-Meist steht und fällt eine gute Strategie mit der Heuristik-Funktion. Es macht also Sinn diese im laufe der Zeit nochmal zu überdenken bzw. daran etwas rumzuschrauben.
+Meist steht und fällt eine gute Strategie mit der Heuristik Funktion. Es macht also Sinn diese im Laufe der Zeit nochmal zu überdenken bzw. daran etwas rumzuschrauben.
 
 ### Naive Strategie
 Bei der ersten Strategie handelt es sich um einen sehr naiven Ansatz. Dabei betrachten wir den aktuellen Spielzustand $S_i$ und simulieren jede mögliche Aktion auf diesem Zustand.
@@ -117,7 +117,7 @@ Wir erhalten also maximal 7 neue unterschiedliche Spielzustände $S_{i+1}$. Ich 
 
 ![NaiveSimulation](/images/boardGame/naiveSimulation.png){:width="900" style="display:block; margin-left:auto; margin-right:auto"}
 
-Nun wird für jeden simulierten Zustand die Heuristik-Funktion aufgerufen. Danach können wir den Zustand auswählen, der am meisten Punkte bekommen hat.
+Nun wird für jeden simulierten Zustand die Heuristik Funktion aufgerufen. Danach können wir den Zustand auswählen, der am meisten Punkte bekommen hat.
 Die Aktion die zu diesem Zustand geführt hat, wird als Aktion für den den nächsten Zug gewählt.\
 In diesem Beispiel wird vermutlich der mittlere Zustand mit den meisten Punkten bewertet. Die Aktion die deswegen für den Computer ausgewählt wird ist $a_4=4$.
 
@@ -136,7 +136,8 @@ Aus Platzgründen werden in jedem Schritt nur zwei Zustände simuliert. In Wirkl
 Im nächsten Schritt rufen wir wieder unsere Heuristik Funktion auf. Jedoch nur für die Spielzustände auf der letzten Ebene. Im übrigen werden die Inhalte der letzten Ebene Blätter genannt. 
 Mehr dazu gibt es in einem meiner [letzten Artikel](../Sort). 
 Nun werden die Ebenen von Unten nach Oben durchgegangen. Die Ebenen, die die Züge des Gegners darstellen, wählen die **min**imalen Punkten aus der Ebene darunter aus. 
-Die Ebenen, die die Züge des Computers darstellen, wählen die **max**imalen Punkte aus der Ebene darunter aus.\ Dieses Verfahren stellt sicher, dass der Computer seine eigenen Punkte maximiert
+Die Ebenen, die die Züge des Computers darstellen, wählen die **max**imalen Punkte aus der Ebene darunter aus.\
+Dieses Verfahren stellt sicher, dass der Computer seine eigenen Punkte maximiert
 und betrachtet auch den Fall, dass der Gegner versuchen wird, die Punkte des Computers zu minimieren.\
 Nun wählen wir wieder den Spielzustand aus, der die meisten Punkte bekommt.\
 Dieser Spielzustand haben wir ja erreicht, in dem wir eine Kette von Aktionen ausgeführt haben. Aus dieser Kette wählen wir nun die erste Aktion aus, als $a_i$, als tatsächliche Aktion die 
@@ -151,14 +152,60 @@ In einem Spiel können ja maximal $7\*6=42$ Züge aufkommen. Warum simulieren wi
 berechnen zu können.\
 Die Problematik ist, dass wir $\sum_{i=1}^{42} 7^i$ Zustände simulieren müssten. Das sind laut Wolframalpha 364 Quintilliarden. 
 Wenn wir bedenken, dass ein moderner Rechner ca. 16 Milliarde Byte an Speicher besitzt, haben wir also schon ein großes Speicherproblem. 
-Geschweige denn, dass wir Jahre brauchen würden, um all diese Zustände zu simulieren. Es macht also Sinn eine geringere Simulationsgröße sie z.B. 6 festzulegen.
+Geschweige denn, dass wir Jahre brauchen würden, um all diese Zustände zu simulieren. Es macht also Sinn eine geringere Simulationsgröße wie z.B. 6 festzulegen.
 
 Der Minmax-Algorithmus kann noch durch z.B. Alpha-Beta Pruning beschleunigt werden, jedoch will ich darauf nicht eingehen, da die Funktionalität die selbe ist.
 
 Der große Nachteil der Minmax-Strategie ist, dass wir nur ein paar Zeitschritte in die Zukunft dadurch schauen können. Wie können wir das also verbessern?
 
 ### Monte Carlo Tree Search
-Monte Carlo ist nicht nur für seine Rennstrecke sondern auch für seine Casinos und somit auch Glücksspiele bekannt.
+Monte Carlo ist nicht nur für seine Rennstrecke sondern auch für seine Casinos und somit auch für Glücksspiele bekannt.
 Auch in Monte Carlo Algorithmen geht es um Glück. Genauer gesagt um Zufallszahlen.
+
+Wie schon vorher beschrieben, wären alle unsere Probleme gelöst, wenn wir alle Spielzüge vorhersagen bzw. durchsuchen könnten. Warum das nicht möglich ist, haben wir gerade geklärt.\
+Was ist jedoch, wenn wir von diesem riesigen Baum uns nur ein paar vielversprechende Äste ansehen. Wir picken uns also einen Pfad des Spielbaums raus und schauen, ob wir am Ende des 
+Pfades gewinnen oder verlieren. Gewinnen wir, ist dieser Pfad vielversprechend und wir können ihn genauer untersuchen.
+
+Der Algorithmus durchläuft dabei vier Phasen: *Selection*, *Expansion*, *Simulation* und *Backpropagation*.
+
+#### Selection
+Zunächst wird ein Blatt (also ein Knoten ohne Kinder) gewählt, der am vielversprechendsten ist. 
+Ob ein Knoten vielversprechend ist oder nicht kann durch verschiedene Kriterien bestimmt werden.
+Meist ist es jedoch ein Verhältnis zwischen der Anzahl der Besuche und der Gewinne an diesen Knoten.
+
+![MCTSSelection](/images/boardGame/mctsSelection.png){:width="900" style="display:block; margin-left:auto; margin-right:auto"}
+
+In diesem Bild ist die Beschriftung in den Knoten so zu interpretieren: *AnzahlBesuche*/*AnzahlGewinne*.
+Hier würde der Knoten links unten gewählt werden. Dieser Knoten ist nun Kandidat für die nächste Phase: Expansion
+
+#### Expansion
+Der Knoten der ausgewählt wurde, wird nun expandiert. Das heißt es werden alle möglichen neuen Spielzustände die aus diesem Knoten entstehen können in die nächste Ebene eingefügt.
+![MCTSExpansion](/images/boardGame/mctsExpansion.png){:width="900" style="display:block; margin-left:auto; margin-right:auto"}
+
+Natürlich müssten es hier wieder sieben neue Knoten sein, jedoch wäre das sehr schnell unübersichtlich. Nun wählen wir aus den neu erstellten Knoten den ersten aus. 
+Dieser wird unser Kandidat für die Simulation.
+
+#### Simulation
+Ab den Spielzustand des ausgewählten Knoten wird nun ein komplettes Spiel simuliert. Dabei wird abwechselnd immer ein Spielzug zufällig gewählt. 
+Am Ende der Simulation haben wir entweder Gewonnen, Verloren oder es ist ein Unentschieden.
+![MCTSSimulation](/images/boardGame/mctsSimulation.png){:width="900" style="display:block; margin-left:auto; margin-right:auto"}
+
+#### Backpropagation
+In der letzten Phase wird das Ergebnis der Simulations-Phase an alle Knoten die direkt darüber sind, weitergegeben. Wenn ein Gewinn entstanden ist, werden die Anzahl der Gewinne um eins erhöht.
+Außerdem werden noch alle Besucherzahlen um eins erhöht, unabhängig vom Ausgang der Simulation.
+![MCTSBackpropagation](/images/boardGame/mctsBackpropagation.gif){:width="900" style="display:block; margin-left:auto; margin-right:auto"}
+
+
+Alle vier Phasen werden jetzt nacheinander ein paar hundert mal wiederholt, bis unser Spielbaum groß genug ist, um eine gewisse Aussagekraft zu besitzen.\
+Zum Schluss wird der direkte Kindsknoten der Wurzel ausgewählt, der die größte Besucherzahl hat. Die Aktion, die zu diesem Knoten geführt hat, wird wieder als tatsächliche Aktion des Computers ausgewählt.
+
+Der Monte-Carlo-Tree-Search-Algorithmus ist deswegen so interessant, weil er ohne Heuristik Funktion auskommt. Das heißt für uns, wir müssen nicht mehr darauf achten, wie gut unsere gewählte 
+Heuristik Funktion ist. Ist das nicht großartig?\
+Der Nachteil dieser Methode ist, dass wir Züge übersehen können, da wir ja die Züge zufällig wählen. Diese Gefahr kann jedoch vermindert werden, indem wir die vier Phasen sehr oft wiederholen.
+Das ist natürlich wieder Rechenaufwendiger. Man muss also einen guten Mittelweg finden.
+
+## Aussicht
+Das waren jetzt drei KI-Algorithmen, die dem Computer helfen können, dich in Vier-Gewinnt zu schlagen. Ich hätte noch zwei weitere Algorithmen getestet, die auf Machine-Learning basieren.
+Jedoch werden die erst im nächsten Kapitel besprochen.
 
 **Danke fürs lesen, bleibt neugierig**
