@@ -18,7 +18,7 @@ avatar: /images/profilePic.png
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
-  email: vincent@gierisch.org
+  email: me@vincentgierisch.de
   facebook:
   flickr:
   github: Simple-codinger
@@ -40,7 +40,7 @@ google_analytics: G-963SD2WNHS
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url: https://simple-codinger.github.io/
+url: https://vincentgierisch.de
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)

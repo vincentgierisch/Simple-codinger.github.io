@@ -13,4 +13,4 @@ And I also don't have time to tell you what Laptop to buy.
 
 ### Contact me
 
-[vincent@gierisch.org](mailto:vincent@gierisch.org)
+[me@vincentgierisch.de](mailto:me@vincentgierisch.de)
