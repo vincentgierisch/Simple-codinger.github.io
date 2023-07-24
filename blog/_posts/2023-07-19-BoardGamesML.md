@@ -99,5 +99,36 @@ Wenn wir die Tabelle loswerden wollen, können wir nicht erwarten, dass die Funk
 Aber die Funktion kann eine Annäherung der Werte, die in der Tabelle stehen würden, zurückgeben. Deshalb wird eine solche Funktion *Approximationsfunktion* genannt.
 
 ## Deep-Q-Learning
-Es gibt viele Möglichkeiten eine solche Approximationsfunktion abzubilden. Die wohl belibteste Methode ist das neuronale Netz.
+Es gibt viele Möglichkeiten eine solche Approximationsfunktion abzubilden. Die wohl beliebteste Methode ist das neuronale Netz.
+
+Das neuronale Netz ist der Funktionsweise unseres Gehirns nachempfunden. Eine Menge von künstlicher Neuronen sind in einem großen Verbund zusammen vernetzt.
+Jedes künstliche Neuron kann Daten aufnehmen, eine einfache Berechnung ausführen und das Ergebnis anschließend weiterschicken. Während des Trainings werden die Parameter der Berechnung feinjustiert.
+Durch dieses einfache Prinzip können verschiedene Aufgaben von dem neuronalen Netz gelöst werden, von der Bilderkennung bis zur Sprachverarbeitung.
+
+In dem folgendem Bild ist ein neuronales Netz abgebildet.
+![Neuronal Network](../../images/boardGameML/neuronalNetwork.png)
+
+Wie man sehen kann, ist ein neuronales Netz in Schichten unterteilt. Die Neuronen (Kreise) jeder Schicht sind jeweils mit allen anderen Neuronen der nächsten Schicht verbunden.
+Es gibt immer ein Input Layer (Eingabeschicht) (hier rot) und ein Output Layer (Ausgabeschicht) (grün). Dazwischen liegen ein oder mehrere Hidden Layers (Verborgene Schichten) (grau).
+
+Ich versuche das mal mit einem Beispiel zu veranschaulichen. 
+
+### Funktionsweise eines neuronalen Netzes
+Wir haben kleine Bildchen gegeben mit zehn auf zehn Pixeln. Auf diesen Bildern ist jeweils eine handschriftliche Ziffer abgebildet.
+Das neuronale Netz soll nun ein Bild als Eingabe verwenden und ausgeben, welche Zahl am wahrscheinlichsten auf dem Bild abgebildet ist.\
+Wie sieht unser Netz nun aus? Am einfachsten wäre es, wenn man für jeden einzelnen Pixel ein einzelnes Neuron im Input Layer anlegt. D.h. wir benötigen 100 Neuronen im Input Layer.
+Im Output Layer legen wir 10 Neuronen an. Für jede Ziffer (0-9) eine. Am Schluss sollen Werte von 0 bis 1 in den Neuronen des Output Layers stehen. Je näher sich der Wert bei 1 befindet,
+desto Wahrscheinlicher ist es die Ziffer, die das Neuron repräsentiert.\
+Wie genau die Hidden Layers organisiert sind, ist eine Wissenschaft für sich. Für die meisten einfacheren Probleme ist ein einzelnes Hidden Layer ausreichend.
+Die Anzahl der Neuronen sollte irgendwo zwischen Größe des Input und Output Layers sein.
+
+In der Trainingsphase werden dem neuronalen Netz eine Menge an Bildern gezeigt, von denen wir bereits die abgebildete Ziffer kennen.
+Wurde ins Netz ein Bild eingespeist, so bilden wir die Differenz zwischen der Ausgabe des Netzes und der erwünschten Ausgabe.\
+Nun wird ein Rückwärtsdurchlauf (engl: Backpropagation) durchgeführt. Dabei werden die Gewichte und Parameter der Neuronen schrittweise angepasst, 
+um die Differenz zu minimieren.
+
+### Neuronales Netz als Approximationsfunktion
+Wie bauen wir nun unser neuronales Netz um eine Q-Tabelle zu ersetzen?
+
+Nach der Trainingsphase sollte der Fehler so minimal sein, dass das Netz brauchbare Ergebnisse liefert, auch für Eingaben, die das Netz nicht während des Trainings gesehen hat.
  
