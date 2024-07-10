@@ -52,11 +52,11 @@ Der Schlüssel der Ceasar Chiffre ist also die Anzahl, um wie viel das Alphabet 
 Ein offensichtliches Problem dieses Verschlüsselungsverfahrens ist, dass es nur 25 Schlüssel gibt. Das bedeutet, man kann leicht alle möglichen Schlüssel ausprobieren, um so an die Nachricht zu kommen.
 
 ## Zweiter Weltkrieg
-Machen wir wieder einen deutlich größeren Zeitsprung. In die Zeit des zweiten Weltrkrieges.\
+Machen wir wieder einen deutlich größeren Zeitsprung. In die Zeit des zweiten Weltkrieges.\
 Da alle Parteien davon ausgehen mussten, dass ihre Funksprüche abgehört werden, mussten diese verschlüsselt werden.
 Nazi-Deutschland benutzte für die Verschlüsselung die Enigma.\
-Die Enigma ähnelt vom Aussehen einer Schreibmaschine. Für jeden Buchstaben den man eintippt, leuchtet ein anderer Buchstabe auf.
-So konnte man seine Nachricht eingeben und die Buchstaben die dabei aufleuchten ergaben die verschlüsselte Nachricht.\
+Die Enigma ähnelt vom Aussehen einer Schreibmaschine. Für jeden Buchstaben, den man eintippt, leuchtet ein anderer Buchstabe auf.
+So konnte man seine Nachricht eingeben und die Buchstaben, die dabei aufleuchten, ergaben die verschlüsselte Nachricht.\
 Den Vorgang der Verschlüsselung kann man sich ähnlich zur Ceasar-Chiffre vorstellen. Jedoch ist das Verschlüsselungsalphabet (unten) willkürlich angeordnet.
 Verantwortlich für die Anordnung des Verschlüsselungsalphabets waren zwei Bestandteile. 
 Mehrere Walzen innerhalb der Maschine, sowie ein Steckbrett, welches für jeden Stecker zwei Buchstaben miteinander vertauscht hat. 
@@ -64,13 +64,15 @@ Wurde ein Buchstabe auf der Tastatur angeschlagen, haben sich die Walzen in eine
 
 ![EnigmaMachine](/images/enigma.jpg){:width="700" style="display:block; margin-left:auto; margin-right:auto"}
 
-Um die Nachricht zu entschlüsseln brauchte der Empfänger ebenfalls eine Enigma. 
+Um die Nachricht zu entschlüsseln, brauchte der Empfänger ebenfalls eine Enigma. 
 Auch mussten die Walzenstellung sowie die Anordnung des Steckbrettes die selbe sein, wie die, die zur Verschlüsselung benutzt worden ist. 
 Anschließend konnten die einzelnen Buchstaben der verschlüsselten Nachricht eingegeben werden. Die Buchstaben, die dabei aufleuchteten, konnten zur ursprünglichen Nachricht zusammengesetzt werden.\
-Der Schlüssel den die Enigma benutzte war also die Stellung der Walzen und die Einstellung des Steckbretts. Diese wurden in einem Schlüsselbuch der Wehrmacht festgehalten.
+Der Schlüssel, den die Enigma benutzte, war also die Stellung der Walzen und die Einstellung des Steckbretts. Diese wurden in einem Schlüsselbuch der Wehrmacht festgehalten.
 
 ## Kalter Krieg
 <!-- Einmalverschlüsselung -->
 <!-- Später beschreiben was bei den einzelnen Techniken der Schlüssel ist -->
+Auch die Spione, die auf beiden Seiten des Kalten Krieges tätig waren, mussten ihre Nachrichten verschlüsseln.
+
 
 **Danke fürs Lesen, bleibt neugierig**
