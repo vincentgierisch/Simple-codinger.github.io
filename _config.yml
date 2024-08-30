@@ -83,5 +83,6 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+  - publish.sh
 
 theme: jekyll-theme-cayman
