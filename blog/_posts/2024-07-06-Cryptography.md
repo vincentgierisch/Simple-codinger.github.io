@@ -163,7 +163,7 @@ $\text{Nachricht}\xrightarrow[\text{öffentlicher Schlüssel}]{\text{Bertas}}\te
 Anders als bei den vorherigen Methoden, lässt sich die Nachricht nun nicht mehr mit demselben Schlüssel entschlüsseln, sondern nur noch mit einem zweiten Schlüssel.\
 Um das zu ermöglichen, müssen die beiden Schlüssel natürlich in einer Art von Beziehung stehen.\
 Leider müssen wir uns, um uns diese Beziehung genauer anzusehen, erst einmal ein paar mathematische Grundlagen ins Gedächtnis zurückrufen.
-Sollte man da ~grundlos~ zurückschrecken, kann gerne zum Kapitel **Sicherheit** gesprungen werden.
+Sollte man da ~~grundlos~~ zurückschrecken, kann gerne zum Kapitel **Sicherheit** gesprungen werden.
 
 ### RSA Grundlagen
 #### Teilermenge
@@ -352,7 +352,9 @@ Es existiert eine Überwachungsstrategie mit dem Namen: **Harvest now, decrypt l
 Angreifer sowie Geheimdienste sammeln jetzt schon Daten, mit der Hoffnung diese in Zukunft entschlüsseln zu können. 
 Deshalb geht der Trend hin zu Verschlüsselungsmethoden, die nicht auf der Primfaktorzerlegung beruhen und Quanten Sicher sind.
 
-
+#### Credit
+Vieles aus den mathematischen Grundlagen habe ich von [Florian Dalwik](https://www.youtube.com/@Florian.Dalwigk).
+Schaut mal gerne bei seinem Kanal vorbei und vor allem bei dem hervorragenden [RSA Video](https://www.youtube.com/watch?v=X2yDcLE77To).
 
 
 
