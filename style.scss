@@ -30,6 +30,41 @@ body {
   width: 100%;
 }
 
+.publications {
+  .publication {
+    padding-bottom: 1.5em;
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid $lightGray;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    h3 {
+      margin: 0 0 5px;
+    }
+  }
+
+  .publication-meta {
+    margin: 0 0 10px;
+    color: $gray;
+    font-size: 16px;
+  }
+
+  .publication-abstract {
+    font-size: 16px;
+
+    summary {
+      cursor: pointer;
+      color: $blue;
+    }
+
+    p {
+      color: $darkGray;
+    }
+  }
+}
+
 .projectPreview {
 	.container {
 		display: flex;

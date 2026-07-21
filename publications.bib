@@ -1,0 +1,29 @@
+% Add one BibTeX entry per publication. Recognized fields:
+%   title, author, year          -> shown for every entry
+%   journal / booktitle / publisher / school -> shown as the venue
+%   url (or doi, used as a fallback link)
+%   abstract (or note)           -> shown in a collapsible "Abstract" toggle
+%                                    put each paragraph on its own line
+%
+% Replace the example entry below with your real publications.
+
+
+
+
+@article{gierisch:26:qef,
+ archiveprefix = {arXiv},
+ author = {Vincent Gierisch and Wolfgang Mauerer},
+ booktitle = {Proceedings SQS@ICSOC},
+ entrysubtype = {Workshop},
+ eprint = {2511.04563},
+ month = {1},
+ primaryclass = {quant-ph},
+ title = {QEF: Reproducible and Exploratory Quantum Software Experiments},
+ url = {https://arxiv.org/abs/2511.04563},
+ year = {2026},
+ abstract = {Commercially available Noisy Intermediate-Scale Quantum (NISQ) devices now make small hybrid quantum-classical experiments practical, but many tools hide configuration or demand ad-hoc scripting.
+We introduce the Quantum Experiment Framework (QEF): A lightweight framework designed to support the systematic, hypothesis-driven study of quantum algorithms. Unlike many existing approaches, QEF emphasises iterative, exploratory analysis of evolving experimental strategies rather than exhaustive empirical evaluation of fixed algorithms using predefined quality metrics. The framework's design is informed by a comprehensive review of the literature, identifying principal parameters and measurement practices currently reported in the field.
+QEF captures all key aspects of quantum software and algorithm experiments through a concise specification that expands into a Cartesian product of variants for controlled large-scale parameter sweeps. This design enables rigorous and systematic evaluation, as well as precise reproducibility. Large sweeps are automatically partitioned into asynchronous jobs across simulators or cloud hardware, and ascertain full hyper-parameter traceability. QEF supports parameter reuse to improve overall experiment runtimes, and collects all metrics and metadata into a form that can be conveniently explored with standard statistical and visualisation software.
+By combining reproducibility and scalability while avoiding the complexities of full workflow engines, QEF seeks to lower the practical barriers to empirical research on quantum algorithms, whether these are designed for current NISQ devices or future error-corrected quantum systems.}
+}
+

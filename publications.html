@@ -1,0 +1,30 @@
+---
+layout: default
+title: Publications
+---
+<div class="publications">
+  {% for pub in site.data.publications %}
+    <article class="publication">
+      <h3>
+        {% if pub.url %}
+          <a href="{{ pub.url }}">{{ pub.title }}</a>
+        {% else %}
+          {{ pub.title }}
+        {% endif %}
+      </h3>
+      <p class="publication-meta">
+        {{ pub.authors }}{% if pub.venue %} &middot; {{ pub.venue }}{% endif %}{% if pub.month_name or pub.year %} &middot; {% if pub.month_name %}{{ pub.month_name }} {% endif %}{{ pub.year }}{% endif %}
+      </p>
+      {% if pub.abstract.size > 0 %}
+        <details class="publication-abstract">
+          <summary>Abstract</summary>
+          {% for paragraph in pub.abstract %}
+            <p>{{ paragraph }}</p>
+          {% endfor %}
+        </details>
+      {% endif %}
+    </article>
+  {% else %}
+    <p>No publications yet.</p>
+  {% endfor %}
+</div>
